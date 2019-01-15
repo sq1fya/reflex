@@ -15,59 +15,63 @@
   </head>
 
   <body>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="m-5">Życia:</div>
-      <div class="m-5">Punkty:</div>
-      <h1 class="m-5 col-3">REFLEX</h1>
-      <div class="m-5">Czas: sek</div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="m-5">Życia:</div>
+        <div class="m-5">Punkty:</div>
+        <h1 class="m-5 col-3">REFLEX</h1>
+        <div class="m-5">Czas: <spam class="timer">0 sek</spam></div>
+      </div>
     </div>
-  </div>
     <div class="game_window">
       <div class="container">
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
+          <a href="#" id="module" class="btn btn-sq-lg btn-primary zielony"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
         </div>
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
         </div>
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
         </div>
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
         </div>
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
-          <a href="#" class="btn btn-sq-lg btn-primary"> </a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary"></a>
         </div>
       </div>
       <div class="text-center">
-        <button class="btn btn-lg btn-success">Start</button>
-        <button class="btn btn-lg btn-danger">Restet</button>
+        <button class="btn btn-lg btn-success" onclick="startTimer();">
+          Start
+        </button>
+        <button class="btn btn-lg btn-danger" onclick="resetGame();">
+          Restet
+        </button>
       </div>
     </div>
 
-    <script src="bundle.js"></script>
+    <!-- <script src="bundle.js"></script> -->
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -83,5 +87,46 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      // CLISK EVENT
+      var el = document.getElementById("module");
+
+      el.onclick = function() {
+        var zielony = document.getElementsByClassName('zielony');
+        if element.classList.contains('class')
+        console.log("Click just happened");
+        else {
+          console.log("nie zielony")
+        }
+      };
+
+      // TIMER
+      var second = 1;
+      var timer = document.querySelector(".timer");
+      var interval;
+      function startTimer() {
+        interval = setInterval(function() {
+          timer.innerHTML = second + " sek";
+          second++;
+          if (second == 61) {
+            console.log("koniec czasu");
+            second = 0;
+            clearInterval(interval);
+          }
+          if (second >= 60) {
+            console.log("koniec czasu dzieki za gre");
+          }
+        }, 1000);
+      }
+
+      // RESET TIMER
+      function resetGame() {
+        second = 0;
+        var timer = document.querySelector(".timer");
+        timer.innerHTML = "0 sek";
+        clearInterval(interval);
+      }
+    </script>
   </body>
 </html>

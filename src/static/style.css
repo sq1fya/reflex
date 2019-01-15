@@ -1,26 +1,23 @@
-a {
-  margin: 10px;
-}
-
 .btn-sq-lg {
   width: 100px !important;
   height: 100px !important;
+  margin: 10px;
 }
 
 .btn-sq {
-  width: 100px !important;
-  height: 100px !important;
-  font-size: 10px;
+  width: 50px !important;
+  height: 50px !important;
+  margin: 7px;
 }
 
 .btn-sq-sm {
-  width: 50px !important;
-  height: 50px !important;
-  font-size: 10px;
+  width: 25px !important;
+  height: 25px !important;
+  margin: 5px;
 }
 
 .btn-sq-xs {
-  width: 25px !important;
-  height: 25px !important;
-  padding:2px;
+  width: 15px !important;
+  height: 15px !important;
+  margin: 2px;
 }
