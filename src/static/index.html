@@ -18,7 +18,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="m-5">Życia:</div>
-        <div class="m-5">Punkty:</div>
+        <div class="m-5">Punkty: <span class="point">0</span></div>
         <h1 class="m-5 col-3">REFLEX</h1>
         <div class="m-5">Czas: <spam class="timer">0 sek</spam></div>
       </div>
@@ -26,7 +26,7 @@
     <div class="game_window">
       <div class="container">
         <div class="row justify-content-center">
-          <a href="#" id="module" class="btn btn-sq-lg btn-primary zielony"></a>
+          <a href="#" id="square" class="btn btn-sq-lg btn-primary green_square"></a>
           <a href="#" class="btn btn-sq-lg btn-primary"></a>
           <a href="#" class="btn btn-sq-lg btn-primary"></a>
           <a href="#" class="btn btn-sq-lg btn-primary"></a>
@@ -89,15 +89,19 @@
     ></script>
 
     <script>
-      // CLISK EVENT
-      var el = document.getElementById("module");
+      // CLICSK EVENT
+      var el = document.getElementById("square");
+      point = 0;
+      var score = document.querySelector(".point");
 
       el.onclick = function() {
-        var zielony = document.getElementsByClassName('zielony');
-        if element.classList.contains('class')
+        var square = document.getElementsByClassName("green_square");
+        if (square == "green_square")
         console.log("Click just happened");
         else {
-          console.log("nie zielony")
+          console.log("hit green_square - add point");
+          score.innerHTML = point;
+          point++;
         }
       };
 
