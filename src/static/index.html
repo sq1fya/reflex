@@ -91,7 +91,7 @@
     <script>
       // CLICSK EVENT
       var el = document.getElementById("square");
-      point = 0;
+      var point = 0;
       var score = document.querySelector(".point");
 
       el.onclick = function() {
@@ -127,8 +127,10 @@
       // RESET TIMER
       function resetGame() {
         second = 0;
+        point = 0;
         var timer = document.querySelector(".timer");
         timer.innerHTML = "0 sek";
+        score.innerHTML = "0"
         clearInterval(interval);
       }
     </script>
