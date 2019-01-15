@@ -26,39 +26,43 @@
     <div class="game_window">
       <div class="container">
         <div class="row justify-content-center">
-          <a href="#" id="square" class="btn btn-sq-lg btn-primary green_square"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a
+            href="#"
+            id="square"
+            class="btn btn-sq-lg btn-primary item green_square"
+          ></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
         </div>
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
         </div>
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
         </div>
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
         </div>
         <div class="row justify-content-center">
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
-          <a href="#" class="btn btn-sq-lg btn-primary"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" class="btn btn-sq-lg btn-primary item"></a>
         </div>
       </div>
       <div class="text-center">
@@ -89,50 +93,58 @@
     ></script>
 
     <script>
-      // CLICSK EVENT
-      var el = document.getElementById("square");
-      var point = 0;
-      var score = document.querySelector(".point");
 
-      el.onclick = function() {
-        var square = document.getElementsByClassName("green_square");
-        if (square == "green_square")
-        console.log("Click just happened");
-        else {
-          console.log("hit green_square - add point");
-          score.innerHTML = point;
-          point++;
-        }
-      };
+      // RANDOM ITEM
+      interval = setInterval(function() {
+      var random = Math.floor(Math.random() * $('.item').length);
+      $('.item').eq(random).show();
+      console.log(random)
+      }, 1000);
+            
 
-      // TIMER
-      var second = 1;
-      var timer = document.querySelector(".timer");
-      var interval;
-      function startTimer() {
-        interval = setInterval(function() {
-          timer.innerHTML = second + " sek";
-          second++;
-          if (second == 61) {
-            console.log("koniec czasu");
-            second = 0;
-            clearInterval(interval);
-          }
-          if (second >= 60) {
-            console.log("koniec czasu dzieki za gre");
-          }
-        }, 1000);
-      }
+            // CLICSK EVENT
+            var el = document.getElementById("square");
+            var point = 0;
+            var score = document.querySelector(".point");
 
-      // RESET TIMER
-      function resetGame() {
-        second = 0;
-        point = 0;
-        var timer = document.querySelector(".timer");
-        timer.innerHTML = "0 sek";
-        score.innerHTML = "0"
-        clearInterval(interval);
-      }
+            // TIMER
+            var second = 1;
+            var timer = document.querySelector(".timer");
+            var interval;
+            function startTimer() {
+              el.onclick = function() {
+                var square = document.getElementsByClassName("green_square");
+                if (square == "green_square") console.log("Click just happened");
+                else {
+                  console.log("hit green_square - add point");
+                  score.innerHTML = point;
+                  point++;
+                }
+              };
+
+              interval = setInterval(function() {
+                timer.innerHTML = second + " sek";
+                second++;
+                if (second == 61) {
+                  console.log("koniec czasu");
+                  second = 0;
+                  clearInterval(interval);
+                }
+                if (second >= 60) {
+                  console.log("koniec czasu dzieki za gre");
+                }
+              }, 1000);
+            }
+
+            // RESET TIMER
+            function resetGame() {
+              second = 0;
+              point = 0;
+              var timer = document.querySelector(".timer");
+              timer.innerHTML = "0 sek";
+              score.innerHTML = "0";
+              clearInterval(interval);
+            }
     </script>
   </body>
 </html>
