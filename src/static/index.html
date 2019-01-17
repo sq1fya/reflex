@@ -96,12 +96,12 @@
         var cell = document.getElementById(random);
         if (cell) {
           setTimeout(function() {
-            $(cell).addClass("green");
-            $(cell).removeClass("item");
+            cell.classList.add("green");
+            cell.classList.remove("item");
           }, 0);
           setTimeout(function() {
-            $(cell).removeClass("green");
-            $(cell).addClass("item");
+            cell.classList.remove("green");
+            cell.classList.add("item");
           }, 2000);
         }
         console.log(random);
