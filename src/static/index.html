@@ -100,6 +100,9 @@
             cell.classList.remove("item");
           }, 0);
           setTimeout(function() {
+            if (cell.classList.contains("green")){
+              console.log("------point");
+            }
             cell.classList.remove("green");
             cell.classList.add("item");
           }, 2000);
@@ -150,8 +153,8 @@
         } else {
           e = e.target; //assign the element clicked to e
         }
-
         if (e.className && e.className.indexOf("green") != -1) {
+          e.classList.remove("green");
           //if the element has a class name, and that is 'green' then...
           point++;
           score.innerHTML = point;
