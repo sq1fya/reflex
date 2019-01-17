@@ -59,7 +59,6 @@
         var itemCounter = 0;
         var table = document.createElement("table");
         var main = document.getElementsByClassName("main");
-
         table.className = "container";
         for (var i = 0; i < size; i++) {
           var tr = document.createElement("tr");
@@ -80,10 +79,10 @@
         document.body.appendChild(table);
         document.getElementById("main").appendChild(table);
       }
-
       createTable();
 
       // RANDOM ITEM
+
       var life = 3;
       var lifecouter = document.querySelector(".lifecouter");
       var second = 1;
@@ -113,39 +112,37 @@
               cell.classList.add("item");
             }, 2000);
           }
-          if (timer.innerHTML >= "5") { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< set 60
+          if (timer.innerHTML >= "60") {
             clearTimeout(addGreen);
             clearTimeout(removeGreen);
-            console.log("minelo 5 sekund");
           }
-          console.log(random);
-          if (timer.innetHTML >= "5") { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< set 60
+          if (timer.innetHTML >= "60") {
             clearInterval(interval);
           }
         }, 3000));
       }
 
-      // CLICK EVENT
-      // var el = document.getElementById("green");
-
       // TIMER WITH DISABLE BUTTON
-      // var interval;
 
       const btnstart = document.querySelector("#btnStart");
       btnstart.addEventListener("click", function() {
         startGame();
+        btnreset.addEventListener("click", function() {
+          clearInterval(time);
+        });
         this.disabled = true;
         let i = 0;
-        const time = setInterval(
+        time = setInterval(
           function() {
             timer.innerHTML = second + " sek";
             second++;
             i++;
-            if (i >= 5) {  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< set 60
+            if (i >= 60) {
               this.disabled = false;
-              //stop random green field
-              alert("Koniec czasu");
               clearInterval(time);
+              clearInterval(interval);
+              clearTimeout(addGreen);
+              clearTimeout(removeGreen);
             }
           }.bind(this),
           1000
@@ -153,7 +150,6 @@
       });
 
       // CLICK BUTTON ADD POINT / LOSE LIFE
-
       document.body.onclick = function(e) {
         //when the document body is clicked
         if (window.event) {
@@ -171,49 +167,31 @@
           //if the element has a class name, and that is 'item' then...
           life--;
           lifecouter.innerHTML = life;
-          console.log(life); // DEL
           alert("straciłeś życie");
           if (life <= 0) alert("straciłeś życie");
         }
       };
 
-      // TIMER
-
-      // function startTimer() {
-      //   el.onclick = function() {
-      //     var square = document.getElementById("green");
-      //     if (square == "green") console.log("Click just happened");
-      //     else {
-      //       console.log("hit green_square - add point");
-      //       score.innerHTML = point;
-      //       point++;
-      //     }
-      //   };
-
-      //   interval = setInterval(function() {
-      //     timer.innerHTML = second + " sek";
-      //     second++;
-      //     if (second == 61) {
-      //       console.log("koniec czasu");
-      //       second = 0;
-      //       clearInterval(interval);
-      //     }
-      //     if (second >= 60) {
-      //       console.log("koniec czasu dzieki za gre");
-      //     }
-      //   }, 1000);
-      // }
-
-      // RESET TIMER
-
-      // function resetGame() {
-      //   second = 0;
-      //   point = 0;
-      //   var timer = document.querySelector(".timer");
-      //   timer.innerHTML = "0 sek";
-      //   score.innerHTML = "0";
-      //   clearInterval(interval);
-      // }
+      // RESET
+      const btnreset = document.querySelector("#btnReset");
+      btnreset.addEventListener("click", function() {
+        resetGame();
+        function resetGame() {
+          btnstart.disabled = false;
+          clearInterval(interval);
+          clearTimeout(addGreen);
+          clearTimeout(removeGreen);
+          second = 0;
+          point = 0;
+          life = 3;
+          var timer = document.querySelector(".timer");
+          timer.innerHTML = "0 sek";
+          score.innerHTML = "0";
+          lifecouter.innerHTML = "3";
+          var cell = document.querySelector(".green");
+          cell.classList.remove("green");
+        }
+      });
     </script>
   </body>
 </html>
