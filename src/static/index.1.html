@@ -24,7 +24,43 @@
       </div>
     </div>
     <div class="game_window">
-      <div id="main" class="main"></div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <a href="#" id="0" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="1" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="2" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="3" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="4" class="btn btn-sq-lg btn-primary item"></a>
+        </div>
+        <div class="row justify-content-center">
+          <a href="#" id="5" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="6" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="7" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="8" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="9" class="btn btn-sq-lg btn-primary item"></a>
+        </div>
+        <div class="row justify-content-center">
+          <a href="#" id="10" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="11" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="12" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="13" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="14" class="btn btn-sq-lg btn-primary item"></a>
+        </div>
+        <div class="row justify-content-center">
+          <a href="#" id="15" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="16" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="17" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="18" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="19" class="btn btn-sq-lg btn-primary item"></a>
+        </div>
+        <div class="row justify-content-center">
+          <a href="#" id="20" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="21" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="22" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="23" class="btn btn-sq-lg btn-primary item"></a>
+          <a href="#" id="24" class="btn btn-sq-lg btn-primary item"></a>
+        </div>
+      </div>
       <div class="text-center">
         <button
           class="btn btn-lg btn-success"
@@ -41,8 +77,8 @@
           Restet
         </button>
       </div>
-
     </div>
+
     <!-- <script src="bundle.js"></script> -->
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -61,38 +97,13 @@
     ></script>
 
     <script>
-      // MAKE A TABLE
-      var size = 5;
-      var itemCounter = 0;
-      var table = document.createElement("table");
-      var main = document.getElementsByClassName("main");
-
-      table.className = "container";
-      for (var i = 0; i < size; i++) {
-        var tr = document.createElement("tr");
-        tr.className = "row justify-content-center";
-        for (var j = 0; j < size; j++) {
-          var td = document.createElement("td");
-          if (i % 2 == j % 2) {
-            td.className = "btn btn-sq-lg btn-primary item";
-            td.id = itemCounter++;
-          } else {
-            td.className = "btn btn-sq-lg btn-primary item";
-            td.id = itemCounter++;
-          }
-          tr.appendChild(td);
-        }
-        table.appendChild(tr);
-      }
-      document.body.appendChild(table);
-
-      document.getElementById("main").appendChild(table);
-
       // RANDOM ITEM
 
       var intervalstart = (interval = setInterval(function() {
-        var random = Math.floor(Math.random() * document.getElementsByClassName("item").length);
-        document.getElementsByClassName("item").length == (random);
+        var random = Math.floor(Math.random() * $(".item").length);
+        $(".item")
+          .eq(random)
+          .show();
         var cell = document.getElementById(random);
         if (cell) {
           setTimeout(function() {
@@ -114,8 +125,8 @@
       var life = 3;
       var lifecouter = document.querySelector(".lifecouter");
 
-      // TIMER WITH DISABLE BUTTON
 
+      // TIMER WITH DISABLE BUTTON
 
       const btnstart = document.querySelector("#btnStart");
       var second = 1;
@@ -136,9 +147,7 @@
               console.log("Koniec");
               clearInterval(time);
             }
-          }.bind(this),
-          1000
-        );
+          }.bind(this),1000);
       });
 
       // CLICK BUTTON ADD POINT / LOSE LIFE
@@ -153,16 +162,14 @@
 
         if (e.className && e.className.indexOf("green") != -1) {
           //if the element has a class name, and that is 'green' then...
-          point++;
           score.innerHTML = point;
+          point++;
+          
         }
         if (e.className && e.className.indexOf("item") != -1) {
           //if the element has a class name, and that is 'item' then...
-          life--;
           lifecouter.innerHTML = life;
-          console.log(life) // DEL
-          alert('straciłeś życie')
-        if (life <= 0) alert("straciłeś życie")
+          life--;
         }
       };
 
