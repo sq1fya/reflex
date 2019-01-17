@@ -89,6 +89,8 @@
       document.getElementById("main").appendChild(table);
 
       // RANDOM ITEM
+      var lifecouter = document.querySelector(".lifecouter");
+      var life = 3;
 
       var intervalstart = (interval = setInterval(function() {
         var random = Math.floor(Math.random() * document.getElementsByClassName("item").length);
@@ -101,7 +103,9 @@
           }, 0);
           setTimeout(function() {
             if (cell.classList.contains("green")){
-              console.log("------point");
+              life--;
+              lifecouter.innerHTML = life;
+              alert("straciłeś życie");
             }
             cell.classList.remove("green");
             cell.classList.add("item");
@@ -114,8 +118,6 @@
       // var el = document.getElementById("green");
       var point = 0;
       var score = document.querySelector(".point");
-      var life = 3;
-      var lifecouter = document.querySelector(".lifecouter");
 
       // TIMER WITH DISABLE BUTTON
 
