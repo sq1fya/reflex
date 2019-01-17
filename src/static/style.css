@@ -21,3 +21,7 @@
   height: 15px !important;
   margin: 2px;
 }
+
+.green {
+  background-color: green !important;
+}
