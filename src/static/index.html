@@ -26,22 +26,13 @@
     <div class="game_window">
       <div id="main" class="main"></div>
       <div class="text-center">
-        <button
-          class="btn btn-lg btn-success"
-          id="btnStart"
-          onclick="startTimer();"
-        >
+        <button class="btn btn-lg btn-success" id="btnStart" onclick="">
           Start
         </button>
-        <button
-          class="btn btn-lg btn-danger"
-          id="btnReset"
-          onclick="resetGame();"
-        >
+        <button class="btn btn-lg btn-danger" id="btnReset" onclick="">
           Restet
         </button>
       </div>
-
     </div>
     <!-- <script src="bundle.js"></script> -->
     <script
@@ -62,83 +53,98 @@
 
     <script>
       // MAKE A TABLE
-      var size = 5;
-      var itemCounter = 0;
-      var table = document.createElement("table");
-      var main = document.getElementsByClassName("main");
 
-      table.className = "container";
-      for (var i = 0; i < size; i++) {
-        var tr = document.createElement("tr");
-        tr.className = "row justify-content-center";
-        for (var j = 0; j < size; j++) {
-          var td = document.createElement("td");
-          if (i % 2 == j % 2) {
-            td.className = "btn btn-sq-lg btn-primary item";
-            td.id = itemCounter++;
-          } else {
-            td.className = "btn btn-sq-lg btn-primary item";
-            td.id = itemCounter++;
+      function createTable() {
+        var size = 5;
+        var itemCounter = 0;
+        var table = document.createElement("table");
+        var main = document.getElementsByClassName("main");
+
+        table.className = "container";
+        for (var i = 0; i < size; i++) {
+          var tr = document.createElement("tr");
+          tr.className = "row justify-content-center";
+          for (var j = 0; j < size; j++) {
+            var td = document.createElement("td");
+            if (i % 2 == j % 2) {
+              td.className = "btn btn-sq-lg btn-primary item";
+              td.id = itemCounter++;
+            } else {
+              td.className = "btn btn-sq-lg btn-primary item";
+              td.id = itemCounter++;
+            }
+            tr.appendChild(td);
           }
-          tr.appendChild(td);
+          table.appendChild(tr);
         }
-        table.appendChild(tr);
+        document.body.appendChild(table);
+        document.getElementById("main").appendChild(table);
       }
-      document.body.appendChild(table);
 
-      document.getElementById("main").appendChild(table);
+      createTable();
 
       // RANDOM ITEM
-      var lifecouter = document.querySelector(".lifecouter");
       var life = 3;
-
-      var intervalstart = (interval = setInterval(function() {
-        var random = Math.floor(Math.random() * document.getElementsByClassName("item").length);
-        document.getElementsByClassName("item").length == (random);
-        var cell = document.getElementById(random);
-        if (cell) {
-          setTimeout(function() {
-            cell.classList.add("green");
-            cell.classList.remove("item");
-          }, 0);
-          setTimeout(function() {
-            if (cell.classList.contains("green")){
-              life--;
-              lifecouter.innerHTML = life;
-              alert("straciłeś życie");
-            }
-            cell.classList.remove("green");
-            cell.classList.add("item");
-          }, 2000);
-        }
-        console.log(random);
-      }, 3000));
-
-      // CLICK EVENT
-      // var el = document.getElementById("green");
+      var lifecouter = document.querySelector(".lifecouter");
+      var second = 1;
+      var timer = document.querySelector(".timer");
       var point = 0;
       var score = document.querySelector(".point");
 
-      // TIMER WITH DISABLE BUTTON
+      function startGame() {
+        var intervalstart = (interval = setInterval(function() {
+          var random = Math.floor(
+            Math.random() * document.getElementsByClassName("item").length
+          );
+          var cell = document.getElementById(random);
+          document.getElementsByClassName("item").length == random;
+          if (cell) {
+            addGreen = setTimeout(function() {
+              cell.classList.add("green");
+              cell.classList.remove("item");
+            }, 0);
+            removeGreen = setTimeout(function() {
+              if (cell.classList.contains("green")) {
+                life--;
+                lifecouter.innerHTML = life;
+                alert("straciłeś życie");
+              }
+              cell.classList.remove("green");
+              cell.classList.add("item");
+            }, 2000);
+          }
+          if (timer.innerHTML >= "5") { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< set 60
+            clearTimeout(addGreen);
+            clearTimeout(removeGreen);
+            console.log("minelo 5 sekund");
+          }
+          console.log(random);
+          if (timer.innetHTML >= "5") { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< set 60
+            clearInterval(interval);
+          }
+        }, 3000));
+      }
 
+      // CLICK EVENT
+      // var el = document.getElementById("green");
+
+      // TIMER WITH DISABLE BUTTON
+      // var interval;
 
       const btnstart = document.querySelector("#btnStart");
-      var second = 1;
-      var timer = document.querySelector(".timer");
-      var interval;
-
       btnstart.addEventListener("click", function() {
+        startGame();
         this.disabled = true;
         let i = 0;
         const time = setInterval(
           function() {
             timer.innerHTML = second + " sek";
             second++;
-            console.log(i);
             i++;
-            if (i <= 0) {
+            if (i >= 5) {  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< set 60
               this.disabled = false;
-              console.log("Koniec");
+              //stop random green field
+              alert("Koniec czasu");
               clearInterval(time);
             }
           }.bind(this),
@@ -165,9 +171,9 @@
           //if the element has a class name, and that is 'item' then...
           life--;
           lifecouter.innerHTML = life;
-          console.log(life) // DEL
-          alert('straciłeś życie')
-        if (life <= 0) alert("straciłeś życie")
+          console.log(life); // DEL
+          alert("straciłeś życie");
+          if (life <= 0) alert("straciłeś życie");
         }
       };
 
