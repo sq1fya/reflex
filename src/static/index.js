@@ -1,5 +1,3 @@
-// MAKE A TABLE
-
 function createTable() {
   var size = 5;
   var itemCounter = 0;
@@ -26,8 +24,6 @@ function createTable() {
   document.getElementById("main").appendChild(table);
 }
 createTable();
-
-// RANDOM ITEM
 
 var life = 3;
 var lifecouter = document.querySelector(".lifecouter");
@@ -68,8 +64,6 @@ function startGame() {
   }, 3000));
 }
 
-// TIMER WITH DISABLE BUTTON
-
 const btnstart = document.querySelector("#btnStart");
 btnstart.addEventListener("click", function() {
   startGame();
@@ -96,38 +90,30 @@ btnstart.addEventListener("click", function() {
   );
 });
 
-// CLICK BUTTON ADD POINT / LOSE LIFE
-
 function updateStatus() {
   document.body.onclick = function(e) {
-    //when the document body is clicked
     if (window.event) {
-      e = event.srcElement; //assign the element clicked to e (IE 6-8)
+      e = event.srcElement;
     } else {
-      e = e.target; //assign the element clicked to e
+      e = e.target;
     }
     if (e.className && e.className.indexOf("green") != -1) {
       e.classList.remove("green");
-      //if the element has a class name, and that is 'green' then...
       point++;
       score.innerHTML = point;
     }
     if (e.className && e.className.indexOf("item") != -1) {
-      //if the element has a class name, and that is 'item' then...
       life--;
       lifecouter.innerHTML = life;
       alert("straciłeś życie");
     }
     if (lifecouter.innerHTML <= 0) {
-      // btnstart.disabled = false;
       clearInterval(interval);
       clearTimeout(addGreen);
       clearTimeout(removeGreen);
     }
   };
 }
-
-// RESET
 
 const btnreset = document.querySelector("#btnReset");
 btnreset.addEventListener("click", function() {
