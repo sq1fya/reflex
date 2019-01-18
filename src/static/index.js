@@ -40,7 +40,10 @@ function createTable() {
 }
 createTable();
 
+randomCellOn = false;
+
 function randomCell() {
+  if (randomCellOn === false) return;
   var random = Math.floor(
     Math.random() * document.getElementsByClassName("item").length
   );
@@ -67,9 +70,11 @@ gemeOn = false;
 
 function startGame() {
   gameOn = true;
+  randomCellOn = true;
   intervalstart = (interval = setInterval(function() {
     randomCell();
     if (timer.innerHTML >= "60") {
+      timerOn = false;
       clearTimeout(addGreen);
       clearTimeout(removeGreen);
     }
@@ -94,16 +99,16 @@ function startTime() {
   time = setInterval(
     function() {
       let i = 0;
-      timer.innerHTML = second + " sek";
       second++;
-      i++;
-      if (i >= 60) {
-        clearInterval(time);
+      timer.innerHTML = second + " sek";
+      if (second == 60){
+         clearInterval(time);
+         gemeOn = false;
         clearInterval(interval);
         clearTimeout(addGreen);
         clearTimeout(removeGreen);
       }
-    }.bind(this),
+    },
     1000
   );
 }
@@ -129,8 +134,8 @@ function updateStatus() {
     }
     if (life <= 0) {
       stopTimer();
+      randomCellOn = false;
     }
-
   };
 }
 
@@ -142,6 +147,7 @@ function stopTimer() {
 }
 
 function resetGame() {
+  randomCellOn = false;
   gameOn = false;
   point = 0;
   life = 3;
