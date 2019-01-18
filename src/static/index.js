@@ -1,8 +1,14 @@
+var life = 3;
+var lifecouter = document.querySelector(".lifecouter");
+var second = 1;
+var timer = document.querySelector(".timer");
+var point = 0;
+var score = document.querySelector(".point");
+
 function createTable() {
   var size = 5;
   var itemCounter = 0;
   var table = document.createElement("table");
-  var main = document.getElementsByClassName("main");
   table.className = "container";
   for (var i = 0; i < size; i++) {
     var tr = document.createElement("tr");
@@ -24,13 +30,6 @@ function createTable() {
   document.getElementById("main").appendChild(table);
 }
 createTable();
-
-var life = 3;
-var lifecouter = document.querySelector(".lifecouter");
-var second = 1;
-var timer = document.querySelector(".timer");
-var point = 0;
-var score = document.querySelector(".point");
 
 function randomCell() {
   var random = Math.floor(
@@ -56,7 +55,7 @@ function randomCell() {
 }
 
 function startGame() {
-  var intervalstart = (interval = setInterval(function() {
+  intervalstart = (interval = setInterval(function() {
     randomCell();
     if (timer.innerHTML >= "60") {
       clearTimeout(addGreen);
@@ -69,6 +68,7 @@ function startGame() {
 }
 
 const btnstart = document.querySelector("#btnStart");
+
 btnstart.addEventListener("click", function() {
   startGame();
   updateStatus();
@@ -77,9 +77,13 @@ btnstart.addEventListener("click", function() {
     clearInterval(time);
   });
   this.disabled = true;
-  let i = 0;
+  startTime();
+});
+
+function startTime() {
   time = setInterval(
     function() {
+      let i = 0;
       timer.innerHTML = second + " sek";
       second++;
       i++;
@@ -88,12 +92,11 @@ btnstart.addEventListener("click", function() {
         clearInterval(interval);
         clearTimeout(addGreen);
         clearTimeout(removeGreen);
-        this.disabled = false;
       }
     }.bind(this),
     1000
   );
-});
+}
 
 function updateStatus() {
   document.body.onclick = function(e) {
@@ -113,21 +116,36 @@ function updateStatus() {
       lifecouter.innerHTML = life;
       alert("straciłeś życie");
     }
-    if (lifecouter.innerHTML <= 0) {
-      clearInterval(interval);
-      clearTimeout(addGreen);
-      clearTimeout(removeGreen);
+    if (lifecouter.innerHTML <= "0") {
+      // checkLife();
+      stopTimer();
     }
   };
 }
 
-function resetGame() {
-  btnstart.disabled = false;
+// function checkLife() {
+//   if (lifecouter.innerHTML <= "0") {
+//     console.log("game over");
+//     clearInterval(interval);
+//       clearTimeout(addGreen);
+//       clearTimeout(removeGreen);
+//   }
+// }
+
+
+function stopTimer() {
   second = 0;
-  point = 0;
-  life = 3;
   var timer = document.querySelector(".timer");
   timer.innerHTML = "0 sek";
+  clearInterval(time);
+}
+
+function resetGame() {
+  btnstart.disabled = false;
+  point = 0;
+  life = 3;
+  stopTimer();
+  
   score.innerHTML = "0";
   lifecouter.innerHTML = "3";
   clearInterval(interval);
@@ -136,9 +154,6 @@ function resetGame() {
   var cell = document.querySelector(".green");
   if (cell.classList.contains("green")) {
     cell.classList.remove("green");
-  }
-  if (cell.classList == null) {
-    console.log("nulll");
   }
 }
 
