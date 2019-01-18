@@ -119,19 +119,10 @@ function updateStatus() {
     if (lifecouter.innerHTML <= "0") {
       // checkLife();
       stopTimer();
+      resetGame();
     }
   };
 }
-
-// function checkLife() {
-//   if (lifecouter.innerHTML <= "0") {
-//     console.log("game over");
-//     clearInterval(interval);
-//       clearTimeout(addGreen);
-//       clearTimeout(removeGreen);
-//   }
-// }
-
 
 function stopTimer() {
   second = 0;
@@ -145,7 +136,6 @@ function resetGame() {
   point = 0;
   life = 3;
   stopTimer();
-  
   score.innerHTML = "0";
   lifecouter.innerHTML = "3";
   clearInterval(interval);
