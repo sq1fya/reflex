@@ -4,6 +4,15 @@ var second = 1;
 var timer = document.querySelector(".timer");
 var point = 0;
 var score = document.querySelector(".point");
+const btnstart = document.querySelector("#btnStart");
+
+const btnreset = document.querySelector("#btnReset");
+btnreset.addEventListener("click", function() {
+  disableButtonStart();
+  backlightTimerOff();
+  resetGame();
+  backlightLifeOff();
+});
 
 function createTable() {
   var size = 5;
@@ -54,7 +63,10 @@ function randomCell() {
   }
 }
 
+gemeOn = false;
+
 function startGame() {
+  gameOn = true;
   intervalstart = (interval = setInterval(function() {
     randomCell();
     if (timer.innerHTML >= "60") {
@@ -66,8 +78,6 @@ function startGame() {
     }
   }, 3000));
 }
-
-const btnstart = document.querySelector("#btnStart");
 
 btnstart.addEventListener("click", function() {
   startGame();
@@ -100,6 +110,7 @@ function startTime() {
 
 function updateStatus() {
   document.body.onclick = function(e) {
+    if (gameOn === false) return;
     if (window.event) {
       e = event.srcElement;
     } else {
@@ -112,15 +123,14 @@ function updateStatus() {
     }
     if (e.className && e.className.indexOf("item") != -1) {
       backlightLifeOn();
-      life--;
+      if (life > 0) life--;
       lifecouter.innerHTML = life;
       alert("straciłeś życie");
     }
-    if (lifecouter.innerHTML <= "0") {
-      // checkLife();
+    if (life <= 0) {
       stopTimer();
-      resetGame();
     }
+
   };
 }
 
@@ -132,7 +142,7 @@ function stopTimer() {
 }
 
 function resetGame() {
-  btnstart.disabled = false;
+  gameOn = false;
   point = 0;
   life = 3;
   stopTimer();
@@ -147,12 +157,9 @@ function resetGame() {
   }
 }
 
-const btnreset = document.querySelector("#btnReset");
-btnreset.addEventListener("click", function() {
-  backlightTimerOff();
-  resetGame();
-  backlightLifeOff();
-});
+function disableButtonStart() {
+  btnstart.disabled = false;
+}
 
 function backlightTimerOn() {
   document.getElementById("timer").classList.add("badge-success");
