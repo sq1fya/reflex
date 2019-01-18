@@ -64,10 +64,21 @@ function startGame() {
   }, 3000));
 }
 
+
+function backlightTimerOn() {
+  document.getElementById('timer').classList.add("badge-success");
+  document.getElementById('timer').classList.remove("badge-secondary");
+};
+function backlightTimerOff() {
+  document.getElementById('timer').classList.remove("badge-success");
+  document.getElementById('timer').classList.add("badge-secondary");
+};
+
 const btnstart = document.querySelector("#btnStart");
 btnstart.addEventListener("click", function() {
   startGame();
   updateStatus();
+  backlightTimerOn();
   btnreset.addEventListener("click", function() {
     clearInterval(time);
   });
@@ -79,11 +90,11 @@ btnstart.addEventListener("click", function() {
       second++;
       i++;
       if (i >= 60) {
-        this.disabled = false;
         clearInterval(time);
         clearInterval(interval);
         clearTimeout(addGreen);
         clearTimeout(removeGreen);
+        this.disabled = false;
       }
     }.bind(this),
     1000
@@ -115,22 +126,32 @@ function updateStatus() {
   };
 }
 
-const btnreset = document.querySelector("#btnReset");
-btnreset.addEventListener("click", function() {
-  resetGame();
-  function resetGame() {
-    btnstart.disabled = false;
-    clearInterval(interval);
-    clearTimeout(addGreen);
-    clearTimeout(removeGreen);
-    second = 0;
-    point = 0;
-    life = 3;
-    var timer = document.querySelector(".timer");
-    timer.innerHTML = "0 sek";
-    score.innerHTML = "0";
-    lifecouter.innerHTML = "3";
-    var cell = document.querySelector(".green");
+
+function resetGame() {
+  btnstart.disabled = false;
+  second = 0;
+  point = 0;
+  life = 3;
+  var timer = document.querySelector(".timer");
+  timer.innerHTML = "0 sek";
+  score.innerHTML = "0";
+  lifecouter.innerHTML = "3";
+  clearInterval(interval);
+  clearTimeout(addGreen);
+  clearTimeout(removeGreen);
+  var cell = document.querySelector(".green");
+  if (cell.classList.contains('green')) {
     cell.classList.remove("green");
   }
+  if (cell.classList == null){
+    console.log("nulll")
+  }
+}
+
+
+
+const btnreset = document.querySelector("#btnReset");
+btnreset.addEventListener("click", function() {
+  backlightTimerOff();
+  resetGame();
 });
