@@ -32,7 +32,6 @@ var timer = document.querySelector(".timer");
 var point = 0;
 var score = document.querySelector(".point");
 
-
 function randomCell() {
   var random = Math.floor(
     Math.random() * document.getElementsByClassName("item").length
@@ -149,7 +148,6 @@ btnreset.addEventListener("click", function() {
   resetGame();
   backlightLifeOff();
 });
-
 
 function backlightTimerOn() {
   document.getElementById("timer").classList.add("badge-success");
