@@ -64,16 +64,6 @@ function startGame() {
   }, 3000));
 }
 
-
-function backlightTimerOn() {
-  document.getElementById('timer').classList.add("badge-success");
-  document.getElementById('timer').classList.remove("badge-secondary");
-};
-function backlightTimerOff() {
-  document.getElementById('timer').classList.remove("badge-success");
-  document.getElementById('timer').classList.add("badge-secondary");
-};
-
 const btnstart = document.querySelector("#btnStart");
 btnstart.addEventListener("click", function() {
   startGame();
@@ -114,6 +104,7 @@ function updateStatus() {
       score.innerHTML = point;
     }
     if (e.className && e.className.indexOf("item") != -1) {
+      backlightLifeOn();
       life--;
       lifecouter.innerHTML = life;
       alert("straciłeś życie");
@@ -125,7 +116,6 @@ function updateStatus() {
     }
   };
 }
-
 
 function resetGame() {
   btnstart.disabled = false;
@@ -140,18 +130,36 @@ function resetGame() {
   clearTimeout(addGreen);
   clearTimeout(removeGreen);
   var cell = document.querySelector(".green");
-  if (cell.classList.contains('green')) {
+  if (cell.classList.contains("green")) {
     cell.classList.remove("green");
   }
-  if (cell.classList == null){
-    console.log("nulll")
+  if (cell.classList == null) {
+    console.log("nulll");
   }
 }
-
-
 
 const btnreset = document.querySelector("#btnReset");
 btnreset.addEventListener("click", function() {
   backlightTimerOff();
   resetGame();
+  backlightLifeOff();
 });
+
+
+function backlightTimerOn() {
+  document.getElementById("timer").classList.add("badge-success");
+  document.getElementById("timer").classList.remove("badge-secondary");
+}
+function backlightTimerOff() {
+  document.getElementById("timer").classList.remove("badge-success");
+  document.getElementById("timer").classList.add("badge-secondary");
+}
+
+function backlightLifeOn() {
+  document.getElementById("lifecouter").classList.add("badge-danger");
+  document.getElementById("lifecouter").classList.remove("badge-secondary");
+}
+function backlightLifeOff() {
+  document.getElementById("lifecouter").classList.remove("badge-danger");
+  document.getElementById("lifecouter").classList.add("badge-secondary");
+}
