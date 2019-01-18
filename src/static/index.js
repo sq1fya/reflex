@@ -32,28 +32,33 @@ var timer = document.querySelector(".timer");
 var point = 0;
 var score = document.querySelector(".point");
 
+
+function randomCell() {
+  var random = Math.floor(
+    Math.random() * document.getElementsByClassName("item").length
+  );
+  var cell = document.getElementById(random);
+  document.getElementsByClassName("item").length == random;
+  if (cell) {
+    addGreen = setTimeout(function() {
+      cell.classList.add("green");
+      cell.classList.remove("item");
+    }, 0);
+    removeGreen = setTimeout(function() {
+      if (cell.classList.contains("green")) {
+        life--;
+        lifecouter.innerHTML = life;
+        alert("straciłeś życie");
+      }
+      cell.classList.remove("green");
+      cell.classList.add("item");
+    }, 2000);
+  }
+}
+
 function startGame() {
   var intervalstart = (interval = setInterval(function() {
-    var random = Math.floor(
-      Math.random() * document.getElementsByClassName("item").length
-    );
-    var cell = document.getElementById(random);
-    document.getElementsByClassName("item").length == random;
-    if (cell) {
-      addGreen = setTimeout(function() {
-        cell.classList.add("green");
-        cell.classList.remove("item");
-      }, 0);
-      removeGreen = setTimeout(function() {
-        if (cell.classList.contains("green")) {
-          life--;
-          lifecouter.innerHTML = life;
-          alert("straciłeś życie");
-        }
-        cell.classList.remove("green");
-        cell.classList.add("item");
-      }, 2000);
-    }
+    randomCell();
     if (timer.innerHTML >= "60") {
       clearTimeout(addGreen);
       clearTimeout(removeGreen);
